@@ -1,9 +1,11 @@
 package com.treino.HugoReply.entities;
 
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Accessors(chain = true)
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable {

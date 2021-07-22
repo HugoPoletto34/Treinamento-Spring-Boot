@@ -1,6 +1,7 @@
 package com.treino.HugoReply.services;
 
-import com.treino.HugoReply.dto.UserDTO;
+import com.treino.HugoReply.dto.Request.UserRequestDTO;
+import com.treino.HugoReply.dto.Response.UserResponseDTO;
 import com.treino.HugoReply.entities.User;
 import com.treino.HugoReply.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,21 +17,20 @@ public class UserService {
     private UserRepository repository;
 
     @Transactional
-    public List<UserDTO> findAll () {
+    public List<UserResponseDTO> findAll () {
         List<User> list = repository.findAllUsers();
-        return list.stream().map(x -> new UserDTO (x)).collect(Collectors.toList());
+        return list.stream().map(x -> new UserResponseDTO(x)).collect(Collectors.toList());
     }
 
     @Transactional
-    public UserDTO findAllById (Long id) {
+    public UserResponseDTO findAllById (Long id) {
         User user = repository.getById(id);
-        return new UserDTO(user);
+        return new UserResponseDTO(user);
     }
 
     @Transactional
-    public UserDTO insert (UserDTO dto) {
-        User user = new User(null, dto.getNome(), dto.getIdade());
-        user = repository.save(user);
-        return new UserDTO(user);
+    public UserRequestDTO insert (UserRequestDTO dto) {
+        User u = repository.save(dto.build());
+        return new UserRequestDTO(u);
     }
 }
