@@ -1,6 +1,7 @@
 package com.treino.HugoReply.dto.Response;
 
 import com.treino.HugoReply.entities.Profissional;
+import com.treino.HugoReply.entities.TipoProfissional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,8 +19,8 @@ public class ProfissionalResponseDTO {
     private int idade;
     private double salario;
     private Date dataNascimento;
-    private String tipoProfissional;
-    private List<HospitalResponseDTO> hospitais;
+    private TipoProfissional tipoProfissional;
+    //private List<HospitalResponseDTO> hospitais;
 
     public ProfissionalResponseDTO(Profissional p) {
         this.matricula = p.getMatricula();
@@ -28,18 +29,6 @@ public class ProfissionalResponseDTO {
         this.salario= p.getSalario();
         this.dataNascimento = p.getDataNascimento();
         this.tipoProfissional = p.getTipoProfissional();
-        this.hospitais = p.getHospitais().stream().map(x -> new HospitalResponseDTO(x)).collect(Collectors.toList());
-    }
-
-    public ProfissionalResponseDTO build() {
-        ProfissionalResponseDTO p = new ProfissionalResponseDTO();
-        p.setNome(this.nome);
-        p.setMatricula(this.matricula);
-        p.setIdade(this.idade);
-        p.setSalario(this.salario);
-        p.setDataNascimento(this.dataNascimento);
-        p.setTipoProfissional(this.tipoProfissional);
-        p.setHospitais(this.hospitais);
-        return p;
+        //this.hospitais = p.getHospitais().stream().map(x -> new HospitalResponseDTO(x)).collect(Collectors.toList());
     }
 }

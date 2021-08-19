@@ -17,4 +17,5 @@ public interface HospitalRepository extends JpaRepository<Hospital, Long> {
             "LEFT JOIN h.profissionais p " +
             "WHERE p.matricula = :matricula")
     List<Hospital> findAllHospitalsWhoPofissionalWorks(@Param(value = "matricula") Long matricula);
+    
 }

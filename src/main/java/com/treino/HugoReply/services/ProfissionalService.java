@@ -22,8 +22,8 @@ public class ProfissionalService {
 
 
     @Transactional
-    public ProfissionalRequestDTO insert (ProfissionalRequestDTO dto) {
-        Profissional p = pRepository.save(dto.build());
+    public ProfissionalRequestDTO insert (Profissional dto) {
+        Profissional p = pRepository.save(dto);
         return new ProfissionalRequestDTO(p);
     }
 

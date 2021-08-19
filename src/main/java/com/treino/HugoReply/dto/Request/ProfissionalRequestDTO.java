@@ -1,11 +1,13 @@
 package com.treino.HugoReply.dto.Request;
 
 import com.treino.HugoReply.entities.Profissional;
+import com.treino.HugoReply.entities.TipoProfissional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -16,7 +18,7 @@ public class ProfissionalRequestDTO {
     private int idade;
     private double salario;
     private Date dataNascimento;
-    private String tipoProfissional;
+    private TipoProfissional tipoProfissional;
 
     public ProfissionalRequestDTO(Profissional p) {
         this.matricula = p.getMatricula();

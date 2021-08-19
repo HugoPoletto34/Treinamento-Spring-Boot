@@ -26,7 +26,8 @@ public class Profissional implements Serializable {
     private int idade;
     private double salario;
     private Date dataNascimento;
-    private String tipoProfissional;
+    @OneToOne
+    private TipoProfissional tipoProfissional;
     @ManyToMany
     @JoinTable (name = "tb_hospital_profissional",
             joinColumns = @JoinColumn (name = "profissional_matricula"),
