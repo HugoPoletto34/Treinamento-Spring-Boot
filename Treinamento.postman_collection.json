@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "ea77ba29-fdf7-4892-a4ec-8209f8f5b5d0",
+		"name": "Treinamento",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cadatra Cidade",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\" : \"Betim\",\r\n    \"uf\" : \"MG\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/cidade/cadastrar",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cidade",
+						"cadastrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista Cidades",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cidade/listar",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cidade",
+						"listar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostra cidade pelo ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cidade/mostrar/id/33",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cidade",
+						"mostrar",
+						"id",
+						"33"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostra cidade pelo nome",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cidade/mostrar/nome/Betim",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cidade",
+						"mostrar",
+						"nome",
+						"Betim"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

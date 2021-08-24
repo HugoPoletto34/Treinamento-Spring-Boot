@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,13 +14,17 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Cidade implements Serializable {
+public class City implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private UnidadeFederativa uf;
+    private FederativeUnit uf;
 
+    @Enumerated(EnumType.STRING)
+    public FederativeUnit getUf() {
+        return uf;
+    }
 }
