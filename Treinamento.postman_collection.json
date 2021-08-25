@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\" : \"Betim\",\r\n    \"uf\" : \"MG\"\r\n}",
+					"raw": "{\r\n    \"nome\" : \"São Paulo\",\r\n    \"uf\" : \"SP\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -101,7 +101,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\" : \"Lider BH\",\r\n    \"cnpj\" : \"19.157.694/0001-01\",\r\n    \"telefone\" : \"(31) 3408-9720\",\r\n    \"email\" : \"liderbh@chevrolet.com\",\r\n    \"cidade\" : {\r\n        \"nome\" : \"Belo Horizonte\"\r\n    }\r\n}",
+					"raw": "{\r\n    \"nome\" : \"CCAA CONCESSIONARIA\",\r\n    \"cnpj\" : \"66.674.458/0002-15\",\r\n    \"telefone\" : \"(31) 3408-9720\",\r\n    \"email\" : \"ccaa@concessionaria.com\",\r\n    \"cidade\" : {\r\n        \"nome\" : \"São Paulo\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -163,6 +163,39 @@
 			"response": []
 		},
 		{
+			"name": "Listar Concessionaria pelo UF",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cnpj\" : \"19.157.694/0001-01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/concessionaria/listar-todos/uf/SP",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"concessionaria",
+						"listar-todos",
+						"uf",
+						"SP"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Mostra Concessionaria pelo ID",
 			"request": {
 				"method": "GET",
@@ -189,7 +222,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/concessionaria/mostrar/nome/Lider BH",
+					"raw": "localhost:8080/concessionaria/mostrar/nome/CCAA CONCESSIONARIA",
 					"host": [
 						"localhost"
 					],
@@ -198,7 +231,7 @@
 						"concessionaria",
 						"mostrar",
 						"nome",
-						"Lider BH"
+						"CCAA CONCESSIONARIA"
 					]
 				}
 			},
