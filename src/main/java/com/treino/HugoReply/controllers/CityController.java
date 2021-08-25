@@ -23,13 +23,13 @@ public class CityController {
 
     @GetMapping(value = "/mostrar/id/{id}")
     public ResponseEntity<CityResponseDTO> showCityById(@PathVariable Long id) {
-        CityResponseDTO cidade = service.findAllById(id);
+        CityResponseDTO cidade = service.getById(id);
         return ResponseEntity.ok().body(cidade);
     }
 
     @GetMapping(value = "/mostrar/nome/{name}")
     public ResponseEntity<CityResponseDTO> showCityByName(@PathVariable String name) {
-        CityResponseDTO cidade = service.findAllByName(name);
+        CityResponseDTO cidade = service.getByName(name);
         return ResponseEntity.ok().body(cidade);
     }
 

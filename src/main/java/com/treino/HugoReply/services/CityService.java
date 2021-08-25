@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Enumerated;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,13 +24,13 @@ public class CityService {
     }
 
     @Transactional
-    public CityResponseDTO findAllById (Long id) {
+    public CityResponseDTO getById (Long id) {
         City c = repository.getById(id);
         return new CityResponseDTO(c);
     }
 
     @Transactional
-    public CityResponseDTO findAllByName (String name) {
+    public CityResponseDTO getByName (String name) {
         City c = repository.getByName(name);
         return new CityResponseDTO(c);
     }

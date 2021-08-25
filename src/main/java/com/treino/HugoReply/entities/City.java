@@ -21,10 +21,7 @@ public class City implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @Enumerated(EnumType.STRING)
     private FederativeUnit uf;
 
-    @Enumerated(EnumType.STRING)
-    public FederativeUnit getUf() {
-        return uf;
-    }
 }
