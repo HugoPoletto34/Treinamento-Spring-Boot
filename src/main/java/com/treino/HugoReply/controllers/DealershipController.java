@@ -30,7 +30,7 @@ public class DealershipController {
 
     @GetMapping(value = "/listar-todos/cidade/{cidade}")
     public ResponseEntity<List<DealershipResponseDTO>> listDealershipInCity(@PathVariable String cidade){
-        CityResponseDTO cidadeDTO = cityService.findAllByName(cidade);
+        CityResponseDTO cidadeDTO = cityService.getByName(cidade);
         List<DealershipResponseDTO> listDealerships = service.findAllDealershipsByCity(cidadeDTO);
         return ResponseEntity.ok().body(listDealerships);
     }
