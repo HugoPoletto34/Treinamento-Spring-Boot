@@ -1,14 +1,13 @@
 package com.treino.HugoReply.controllers;
 
-import com.treino.HugoReply.dto.Request.CityRequestDTO;
 import com.treino.HugoReply.dto.Request.DealershipRequestDTO;
 import com.treino.HugoReply.dto.Response.CityResponseDTO;
 import com.treino.HugoReply.dto.Response.DealershipResponseDTO;
-import com.treino.HugoReply.entities.Dealership;
 import com.treino.HugoReply.entities.FederativeUnit;
 import com.treino.HugoReply.services.CityService;
 import com.treino.HugoReply.services.DealershipService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,51 +21,60 @@ public class DealershipController {
     @Autowired
     private CityService cityService;
 
+
     @GetMapping(value = "/listar-todos")
-    public ResponseEntity<List<DealershipResponseDTO>> listDealerships(){
+    public ResponseEntity listDealerships(){
         List<DealershipResponseDTO> list = service.findAll();
+        if (list.isEmpty())
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Nenhuma concessionária foi encontrada.");
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/listar-todos/cidade/{cidade}")
-    public ResponseEntity<List<DealershipResponseDTO>> listDealershipInCity(@PathVariable String cidade){
-        CityResponseDTO cidadeDTO = cityService.getByName(cidade);
-        List<DealershipResponseDTO> listDealerships = service.findAllDealershipsByCity(cidadeDTO);
+    public ResponseEntity listDealershipInCity(@PathVariable String cidade) {
+        ResponseEntity<CityResponseDTO> cidadeDTO = cityService.getByName(cidade);
+        if (cidadeDTO.getStatusCodeValue() != 200)
+            return cidadeDTO;
+        List<DealershipResponseDTO> listDealerships = service.findAllDealershipsByCity(cidadeDTO.getBody());
         return ResponseEntity.ok().body(listDealerships);
     }
 
     @GetMapping(value = "/listar-todos/uf/{uf}")
-    public ResponseEntity<List<DealershipResponseDTO>> listDealershipInFU(@PathVariable String uf){
-        FederativeUnit objUF = FederativeUnit.valueOf(uf);
+    public ResponseEntity listDealershipInFU(@PathVariable String uf){
+        FederativeUnit objUF;
+        try {
+            objUF = FederativeUnit.valueOf(uf.toUpperCase());
+        }
+        catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Unidade Federativa \""+uf+"\" inválida: Verifique se a UF está correta.");
+        }
         List<DealershipResponseDTO> listDealerships = service.findAllDealershipsByFU(objUF);
         return ResponseEntity.ok().body(listDealerships);
     }
 
     @GetMapping(value = "/mostrar/id/{id}")
     public ResponseEntity<DealershipResponseDTO> showDealershipById(@PathVariable Long id) {
-        DealershipResponseDTO concessionaria = service.getById(id);
-        return ResponseEntity.ok().body(concessionaria);
+        ResponseEntity concessionaria = service.getById(id);
+        return concessionaria;
     }
 
     @GetMapping(value = "/mostrar/nome/{name}")
     public ResponseEntity<DealershipResponseDTO> showCityByName(@PathVariable String name) {
-        DealershipResponseDTO concessionaria = service.getByName(name);
-        return ResponseEntity.ok().body(concessionaria);
+        ResponseEntity concessionaria = service.getByName(name);
+        return concessionaria;
     }
-
-
 
     @GetMapping(value = "/mostrar/cnpj")
     public ResponseEntity<DealershipResponseDTO> showCityByCNPJ(@RequestBody DealershipRequestDTO cnpj) {
-        DealershipResponseDTO concessionaria = service.getByCNPJ(cnpj.getCnpj());
-        return ResponseEntity.ok().body(concessionaria);
+        ResponseEntity concessionaria = service.getByCNPJ(cnpj.getCnpj());
+        return concessionaria;
     }
 
     @PostMapping (value = "/cadastrar")
-    public ResponseEntity<DealershipRequestDTO> insert (@RequestBody DealershipRequestDTO dto) {
-        dto = service.insert(dto);
+    public ResponseEntity insert (@RequestBody DealershipRequestDTO dto) {
+        ResponseEntity re = service.insert(dto);
         //URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getCodigo()).toUri();
-        return ResponseEntity.status(201).body(dto);
+        return re;
     }
 
 }

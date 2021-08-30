@@ -10,6 +10,7 @@ import com.treino.HugoReply.entities.FederativeUnit;
 import com.treino.HugoReply.repositories.CityRepository;
 import com.treino.HugoReply.repositories.DealershipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,20 +25,21 @@ public class DealershipService {
     private CityRepository cityRep;
 
     @Transactional
-    public DealershipResponseDTO getById (Long id) {
+    public ResponseEntity getById (Long id) {
         Dealership d = repository.getById(id);
-        return new DealershipResponseDTO(d);
+        return valida(d, "Concessionária id=\""+id+"\" não encontrado: Verifique se a ID informada está correta.");
     }
 
     @Transactional
-    public DealershipResponseDTO getByName (String name) {
+    public ResponseEntity getByName (String name) {
         Dealership d = repository.getByName(name);
-        return new DealershipResponseDTO(d);
+        return valida(d, "Concessionária \""+name+"\" não encontrado: Verifique se nome informada está correta.");
     }
 
-    public DealershipResponseDTO getByCNPJ(String cnpj) {
+    @Transactional
+    public ResponseEntity getByCNPJ(String cnpj) {
         Dealership d = repository.getByCNPJ(cnpj);
-        return new DealershipResponseDTO(d);
+        return valida(d, "Concessionária cnpj=\""+cnpj+"\" não encontrado: Verifique se o CNPJ informada está correta.");
     }
 
     @Transactional
@@ -60,16 +62,24 @@ public class DealershipService {
         return listDTO;
     }
 
-    @Transactional
-    public DealershipRequestDTO insert (DealershipRequestDTO dto) {
+    private ResponseEntity valida(Dealership obj, String t) {
         try {
-            dto.setCidade(cityRep.getByName(dto.getCidade().getNome()));
-            Dealership c = repository.save(dto.build());
-            return new DealershipRequestDTO(c);
+            DealershipResponseDTO o = new DealershipResponseDTO(obj);
+            return ResponseEntity.ok().body(o);
         }
         catch (Exception e) {
-            System.err.println("Erro ao inserir cidade: verifique se a informação da unidade federativa está correta.\n" + e);
-            return null;
+            return ResponseEntity.badRequest().body(t);
         }
+    }
+
+    @Transactional
+    public ResponseEntity insert (DealershipRequestDTO dto) {
+
+        dto.setCidade(cityRep.getByName(dto.getCidade().getNome()));
+        if (dto.getCidade() == null)
+            return ResponseEntity.badRequest().body("Cidade não encontrada: Verifique se a cidade informada está correta.");
+        Dealership c = repository.save(dto.build());
+        return ResponseEntity.ok().body(c);
+
     }
 }
