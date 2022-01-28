@@ -43,13 +43,18 @@ public class CityExporter {
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
         sheet.autoSizeColumn(columnCount);
         Cell cell = row.createCell(columnCount);
-        if (value instanceof Long) {
+        if (value instanceof Double) {
+            cell.setCellValue((Double) value);
+//            style.setDataFormat(workbook.createDataFormat()
+//                    .getFormat(BuiltinFormats.getBuiltinFormat( 10 )));
+        } else if (value instanceof Long) {
             cell.setCellValue((Long) value);
         } else if (value instanceof Boolean) {
             cell.setCellValue((Boolean) value);
-        }else {
+        } else {
             cell.setCellValue((String) value);
         }
+
         cell.setCellStyle(style);
     }
 

@@ -79,7 +79,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/cidade/mostrar/nome/Betim",
+					"raw": "localhost:8080/cidade/mostrar/nome/Belo Horizonte",
 					"host": [
 						"localhost"
 					],
@@ -88,7 +88,7 @@
 						"cidade",
 						"mostrar",
 						"nome",
-						"Betim"
+						"Belo Horizonte"
 					]
 				}
 			},
@@ -101,7 +101,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\" : \"CCAA CONCESSIONARIA\",\r\n    \"cnpj\" : \"66.674.458/0002-15\",\r\n    \"telefone\" : \"(31) 3408-9720\",\r\n    \"email\" : \"ccaa@concessionaria.com\",\r\n    \"cidade\" : {\r\n        \"nome\" : \"São Paulo\"\r\n    }\r\n}",
+					"raw": "{\r\n    \"nome\" : \"CCAA CONCESSIONARIA\",\r\n    \"cnpj\" : \"66.674.458/0002-15\",\r\n    \"telefone\" : \"(31) 3408-9720\",\r\n    \"email\" : \"ccaa@concessionaria.com\",\r\n    \"cidade\" : {\r\n        \"nome\" : \"Rio de Janeiro\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -180,7 +180,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/concessionaria/listar-todos/uf/SP",
+					"raw": "localhost:8080/concessionaria/listar-todos/uf/sp",
 					"host": [
 						"localhost"
 					],
@@ -189,7 +189,7 @@
 						"concessionaria",
 						"listar-todos",
 						"uf",
-						"SP"
+						"sp"
 					]
 				}
 			},
@@ -201,7 +201,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/concessionaria/mostrar/id/34",
+					"raw": "localhost:8080/concessionaria/mostrar/id/33",
 					"host": [
 						"localhost"
 					],
@@ -210,7 +210,7 @@
 						"concessionaria",
 						"mostrar",
 						"id",
-						"34"
+						"33"
 					]
 				}
 			},
@@ -264,6 +264,77 @@
 						"concessionaria",
 						"mostrar",
 						"cnpj"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "exportar concessionaria excel",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dealershipList\" : [\r\n        {\r\n            \"id\": 2,\r\n            \"nome\": \"Lider BH\",\r\n            \"cnpj\": \"19.157.694/0001-01\",\r\n            \"telefone\": \"(31) 3408-9720\",\r\n            \"email\": \"liderbh@chevrolet.com\",\r\n            \"cidade\": {\r\n                \"id\": 33,\r\n                \"nome\": \"Belo Horizonte\",\r\n                \"uf\": \"MG\"\r\n            },\r\n            \"valorVendas\": 20.0,\r\n            \"porcentagemValorVendas\": 31.87\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nome\": \"Alencar Veículos BH\",\r\n            \"cnpj\": \"17.308.984/0001-75\",\r\n            \"telefone\": \"(31) 3408-9720\",\r\n            \"email\": \"alencarveiculosbh@dealership.com\",\r\n            \"cidade\": {\r\n                \"id\": 1,\r\n                \"nome\": \"Betim\",\r\n                \"uf\": \"MG\"\r\n            },\r\n            \"valorVendas\": 5.0,\r\n            \"porcentagemValorVendas\": 40.21\r\n        },\r\n        {\r\n            \"id\": 33,\r\n            \"nome\": \"CCAA CONCESSIONARIA\",\r\n            \"cnpj\": \"66.674.458/0002-15\",\r\n            \"telefone\": \"(31) 3408-9720\",\r\n            \"email\": \"ccaa@concessionaria.com\",\r\n            \"cidade\": {\r\n                \"id\": 65,\r\n                \"nome\": \"São Paulo\",\r\n                \"uf\": \"SP\"\r\n            },\r\n            \"valorVendas\": 14.0,\r\n            \"porcentagemValorVendas\": 98.3\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/export/dealership",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"export",
+						"dealership"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "exportar cidade excel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "exportar global excel",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/export/global",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"export",
+						"global"
 					]
 				}
 			},

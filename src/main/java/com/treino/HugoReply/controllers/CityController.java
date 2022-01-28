@@ -1,6 +1,7 @@
 package com.treino.HugoReply.controllers;
 
 import com.treino.HugoReply.Exporter.CityExporter;
+import com.treino.HugoReply.dto.ModuleExporterDTO;
 import com.treino.HugoReply.dto.Request.CityRequestDTO;
 import com.treino.HugoReply.dto.Response.CityResponseDTO;
 import com.treino.HugoReply.services.CityService;
@@ -48,22 +49,4 @@ public class CityController {
         //URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getCodigo()).toUri();
         return re;
     }
-
-    @GetMapping("/export/excel")
-    public void exportToExcel(HttpServletResponse response) throws IOException {
-        response.setContentType("application/octet-stream");
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-        String currentDateTime = dateFormatter.format(new Date());
-
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=cities_" + currentDateTime + ".xlsx";
-        response.setHeader(headerKey, headerValue);
-
-        List<CityResponseDTO> listCitys = service.findAll();
-
-        CityExporter excelExporter = new CityExporter(listCitys);
-
-        excelExporter.export(response);
-    }
-
 }
