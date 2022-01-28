@@ -25,6 +25,8 @@ public class Dealership implements Serializable {
     private String cnpj;
     private String telefone;
     private String email;
+    private Double valorVendas;
+    private Double porcentagemValorVendas;
     @OneToOne
     private City cidade;
 

@@ -17,6 +17,8 @@ public class DealershipResponseDTO {
     private String telefone;
     private String email;
     private City cidade;
+    private Double valorVendas;
+    private Double porcentagemValorVendas;
 
     public DealershipResponseDTO(Dealership entity) {
         this.id = entity.getId();
@@ -25,5 +27,7 @@ public class DealershipResponseDTO {
         this.telefone = entity.getTelefone();
         this.email = entity.getEmail();
         this.cidade = entity.getCidade();
+        this.valorVendas = entity.getValorVendas();
+        this.porcentagemValorVendas = entity.getPorcentagemValorVendas();
     }
 }
